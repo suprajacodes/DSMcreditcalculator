@@ -2,17 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Ensure this matches your default branch name
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -25,12 +21,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Remove the 'cache: npm' line if you don't want to commit a lockfile
-          # Or keep it if you plan to commit package-lock.json
 
-      - name: Install dependencies
-        # Use 'npm install' if package-lock.json is missing
-        # Use 'npm ci' if package-lock.json is present (better for CI)
+      - name: Install Vite
         run: npm install
 
       - name: Build
@@ -42,8 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist" # Vite builds to the 'dist' folder
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
