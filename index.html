@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSM Credit Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1>DSM Credit Calculator</h1>
+                <p>Estimate your annual credit consumption based on specific use cases.</p>
+            </div>
+            <div class="theme-toggle">
+                <!-- Theme toggle switch will go here if needed later -->
+            </div>
+        </header>
+
+        <main class="calculator-workspace">
+            <div class="workspace-header">
+                <div class="col-use-case">Module Configuration</div>
+                <div class="col-details">Parameters</div>
+                <div class="col-credits">Allocated Units</div>
+                <div class="col-actions"></div>
+            </div>
+
+            <div id="line-items-container">
+                <!-- Dynamic line items injected by JS -->
+            </div>
+
+            <button id="add-btn" class="btn btn-primary mt-4">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Add Use Case
+            </button>
+        </main>
+
+        <footer class="sticky-footer">
+            <div class="total-container">
+                <div class="footer-actions">
+                    <button id="import-btn" class="btn btn-secondary text-sm">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                        Import Plan
+                    </button>
+                    <button id="export-btn" class="btn btn-secondary text-sm">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Export Plan
+                    </button>
+                    <input type="file" id="import-file" accept=".json" style="display:none">
+                </div>
+                
+                <div class="total-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">Exhausted</div>
+                        <div class="stat-value">
+                            <input type="number" id="exhausted-credits" class="exhausted-input" min="0" max="100" value="0">
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Consumption</div>
+                        <div class="stat-value"><span id="grand-total">0</span> <span class="unit">Credits</span></div>
+                    </div>
+                    <div class="stat-box accent">
+                        <div class="stat-label">Available (Max 100)</div>
+                        <div class="stat-value"><span id="available-credits">100</span> <span class="unit">Credits</span></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Template for a single simple line item -->
+    <template id="line-item-template">
+        <div class="line-item card shadow-sm">
+            <div class="col-use-case input-group">
+                <label>Selected Module</label>
+                <select class="use-case-select">
+                    <!-- Options injected by JS -->
+                </select>
+                <div class="helper-text unit-hint"></div>
+                <div class="scanline"></div>
+            </div>
+            
+            <div class="col-details input-container">
+                <!-- Dynamic inputs injected by JS -->
+            </div>
+
+            <div class="col-credits">
+                <div class="row-total total-number">0</div>
+            </div>
+
+            <div class="col-actions" style="padding-top: 1.8rem;">
+                <button class="btn-icon text-danger remove-btn" aria-label="Remove item">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
