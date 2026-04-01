@@ -477,7 +477,7 @@ option {
 }
 
 /* SUPRAJA Watermark */
-body::before {
+/* body::before {
     content: 'SUPRAJA Fortanix SME';
     position: fixed;
     bottom: 10%;
@@ -492,7 +492,7 @@ body::before {
     pointer-events: none;
     user-select: none;
     z-index: 0;
-}
+} */
 
 /* Utils */
 .mt-4 {
